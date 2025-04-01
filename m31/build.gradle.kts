@@ -53,13 +53,7 @@ dependencies {
 
     // Android-X
     implementation("androidx.core:core-ktx:1.15.0")
-    implementation("androidx.multidex:multidex:2.0.1")
-
-    // Base Module noinspection GradleDynamicVersion
-    api("com.github.farsroidx:andromeda-foundation:1.0.0")
-
-    // Koin
-    implementation("io.insert-koin:koin-android:3.5.6")
+    implementation("androidx.appcompat:appcompat:1.7.0")
 
 }
 
@@ -71,7 +65,7 @@ publishing {
 
             groupId    = "ir.farsroidx.m31"
             artifactId = "andromeda-extensions"
-            version    = "1.0.0"
+            version    = "2.0.0"
 
             afterEvaluate {
 
