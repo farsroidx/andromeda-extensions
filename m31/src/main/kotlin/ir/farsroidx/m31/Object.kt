@@ -2,6 +2,7 @@
 
 package ir.farsroidx.m31
 
+import android.view.Choreographer
 import java.text.DecimalFormat
 
 // TODO: Object ========================================================================= Object ===
@@ -10,6 +11,12 @@ typealias StringArray = Array<String>
 
 // Log tag for all log messages
 internal const val TAG = "Andromeda"
+
+// Global StrictMode state for redundant calls from resetting the policies multiple times.
+internal var isStrictModeInitialized = false
+
+// Global Choreographer.FrameCallback instance for handling fps monitoring
+internal var fpsCallback: Choreographer.FrameCallback? = null
 
 // Global DecimalFormat instance for formatting numbers with thousands separators
 internal val decimalFormat = DecimalFormat("###,###,###")
@@ -20,6 +27,7 @@ internal val camelRegex = "(?<=[a-zA-Z])[A-Z]".toRegex()
 // Global regular expression to match snake_case letters (underscore followed by a letter)
 internal val snakeRegex = "_[a-zA-Z]".toRegex()
 
+// Global iranian phone numbers
 internal val validPhoneOperators by lazy { listOf("090", "091", "092", "093", "099") }
 
 // Mapping Arabic characters to Persian

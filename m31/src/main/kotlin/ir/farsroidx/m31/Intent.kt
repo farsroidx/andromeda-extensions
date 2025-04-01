@@ -38,13 +38,13 @@ fun Intent?.getQueryParameter(key: String): String =
  * Example:
  * ```kotlin
  * val intent = Intent(this, SomeActivity::class.java)
- * intent.clearLastActivities()
+ * intent.removeActivities()
  * startActivity(intent)
  * ```
  *
  * @param additionalFlags Optional additional flags to be added to the Intent.
  */
-fun Intent.clearLastActivities(additionalFlags: Int = 0) {
+fun Intent.removeActivities(additionalFlags: Int = 0) {
     flags = additionalFlags or Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
 }
 
@@ -76,12 +76,37 @@ fun Context.openAppSettings() {
 }
 
 /**
+ * Starts a new activity with optional flags and customization.
+ *
+ * @param activityClass The activityClass activity class to start.
+ * @param isFinishable If `true`, the current activity will be finished after starting the new activity.
+ * @param isClearTasks If `true`, clears the activity stack before launching the new activity.
+ * @param builder A lambda function to configure the intent before starting the activity.
+ */
+fun Context.startActivity(
+    activityClass: Class<out Activity>,
+    isFinishable: Boolean = false,
+    isClearTasks: Boolean = false,
+    builder: Intent.() -> Unit = {}
+) {
+
+    this.startActivity(
+        Intent(this, activityClass).apply(builder).apply {
+            if (isClearTasks) this.removeActivities()
+        }
+    )
+
+    if (isFinishable && this is Activity) { this.finish() }
+}
+
+/**
  * Start an activity using an intent.
  * @param activityClass The class of the activity to start.
  */
-fun Context.launchActivity(activityClass: Class<out Activity>) {
-    val intent = Intent(this, activityClass)
-    startActivity(intent)
+fun Context.startActivity(activityClass: Class<out Activity>) {
+    this.startActivity(
+        Intent(this, activityClass)
+    )
 }
 
 /**

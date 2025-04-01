@@ -2,6 +2,7 @@
 
 package ir.farsroidx.m31
 
+import android.os.SystemClock
 import android.util.Log
 
 // TODO: Logs ============================================================================= Logs ===
@@ -83,4 +84,30 @@ fun wLog(vararg logs: Any?) {
  */
 fun eLog(vararg logs: Any?) {
     if (BuildConfig.DEBUG) { logs.forEach { log -> Log.e(TAG, log.toString()) } }
+}
+
+/**
+ * Logs the current memory usage of the application.
+ */
+fun logMemoryUsage() {
+
+    val runtime = Runtime.getRuntime()
+
+    val usedMemory = (runtime.totalMemory() - runtime.freeMemory()) / (1024 * 1024)
+
+    val maxMemory = runtime.maxMemory() / (1024 * 1024)
+
+    val freeMemory = runtime.freeMemory() / (1024 * 1024)
+
+    dLog("Used: ${usedMemory}MB, Free: ${freeMemory}MB, Max: ${maxMemory}MB")
+}
+
+/**
+ * Measures the execution time of a given block of code and logs it.
+ */
+inline fun benchmark(block: () -> Unit) {
+    val start = SystemClock.elapsedRealtime()
+    block()
+    val end = SystemClock.elapsedRealtime()
+    dLog("Execution time: ${end - start} ms")
 }
