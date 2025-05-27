@@ -12,9 +12,6 @@ typealias StringArray = Array<String>
 // Log tag for all log messages
 internal const val TAG = "Andromeda"
 
-// Global StrictMode state for redundant calls from resetting the policies multiple times.
-internal var isStrictModeInitialized = false
-
 // Global Choreographer.FrameCallback instance for handling fps monitoring
 internal var fpsCallback: Choreographer.FrameCallback? = null
 

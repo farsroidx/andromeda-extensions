@@ -43,16 +43,12 @@ android {
     kotlinOptions {
         jvmTarget = "17"
     }
-
-    buildFeatures {
-        buildConfig = true
-    }
 }
 
 dependencies {
 
     // Android-X
-    implementation("androidx.core:core-ktx:1.15.0")
+    implementation("androidx.core:core-ktx:1.16.0")
     implementation("androidx.appcompat:appcompat:1.7.0")
 
 }
@@ -65,7 +61,7 @@ publishing {
 
             groupId    = "ir.farsroidx.m31"
             artifactId = "andromeda-extensions"
-            version    = "2.1.0"
+            version    = "2.1.1"
 
             afterEvaluate {
 
